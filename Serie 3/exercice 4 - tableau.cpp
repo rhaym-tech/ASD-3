@@ -16,8 +16,9 @@ void empilerT(PileT &pile, int val);
 void depilerT(PileT &pile, int &val);
 
 //* Les fonctions:
+void Creation(PileT &pile, int size);
 void AfficherPT(PileT pile);
-void ExtrairePlusPetitSupAVal(PileT &pile, int val, int &retourVal);
+void ExtrairePlusPetitSupAVal(PileT &pile, int &retourVal);
 void InsererVal(PileT &pile, int val);
 
 int main() {
@@ -26,15 +27,15 @@ int main() {
     initializerT(P2);
     initializerT(P3);
 
-    for(int i = 0; i < 5; i++) {
-        empilerT(P1, i);
-    }
-    for(int i = 5; i < 11; i++) {
-        empilerT(P2, i);
-    }
-    for(int i = 0; i < 11; i++) {
-        empilerT(P3, i);
-    }
+    int size;
+    do {
+        cout << "Entrez la taille: ";
+        cin >> size;
+    } while(size < 0 || size > 1000);
+
+    Creation(P1, size);
+    Creation(P2, size);
+    Creation(P3, size);
 
     cout << "Pile 1: ";
     AfficherPT(P1);
@@ -44,7 +45,7 @@ int main() {
     AfficherPT(P3);
 
     int minsupval;
-    ExtrairePlusPetitSupAVal(P1, 2, minsupval);
+    ExtrairePlusPetitSupAVal(P1, minsupval);
     cout << "Minsupval = " << minsupval;
 
     InsererVal(P2, minsupval);
@@ -89,6 +90,16 @@ void depilerT(PileT &pile, int &val) {
     val = pile.tab[pile.sommet];
 }
 
+void Creation(PileT &pile, int size) {
+    for(int i = 1; i <= size; i++) {
+        int temp;
+        cout << "Entrez le " << i << (i == 1 ? "er" : "eme") << " element: ";
+        cin >> temp;
+        empilerT(pile, temp);
+    }
+    cout << endl;
+}
+
 void AfficherPT(PileT pile) {
     PileT temp;
     initializerT(temp);
@@ -107,7 +118,11 @@ void AfficherPT(PileT pile) {
     cout << endl;
 }
 
-void ExtrairePlusPetitSupAVal(PileT &pile, int val, int &retourVal) {
+void ExtrairePlusPetitSupAVal(PileT &pile, int &retourVal) {
+    int val;
+    cout << "Entrez la valeur pour extraire la plus petit sup valeur: ";
+    cin >> val;
+
     if(estVideT(pile)) {
         cout << "Pile est vide";
         return;

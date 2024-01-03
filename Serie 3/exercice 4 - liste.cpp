@@ -14,8 +14,9 @@ void empilerL(PileL* &pile, int val);
 void depilerL(PileL* &pile, int &val);
 
 //* Les fonctions:
+void Creation(PileL* &pile, int size);
 void AfficherPL(PileL* &pile);
-void ExtrairePlusPetitSupAVal(PileL* &pile, int val, int &retourVal);
+void ExtrairePlusPetitSupAVal(PileL* &pile, int &retourVal);
 void InsererVal(PileL* &pile, int val);
 void LibererMemoire(PileL* &pile);
 
@@ -25,15 +26,15 @@ int main() {
     initializerL(P2);
     initializerL(P3);
 
-    for(int i = 0; i < 5; i++) {
-        empilerL(P1, i);
-    }
-    for(int i = 5; i < 11; i++) {
-        empilerL(P2, i);
-    }
-    for(int i = 0; i < 11; i++) {
-        empilerL(P3, i);
-    }
+    int size;
+    do {
+        cout << "Entrez la taille: ";
+        cin >> size;
+    } while(size < 0 || size > 1000);
+
+    Creation(P1, size);
+    Creation(P2, size);
+    Creation(P3, size);
 
     cout << "Pile 1: ";
     AfficherPL(P1);
@@ -44,7 +45,7 @@ int main() {
     cout << endl;
 
     int minsupval;
-    ExtrairePlusPetitSupAVal(P1, 2, minsupval);
+    ExtrairePlusPetitSupAVal(P1, minsupval);
     cout << "Minsupval = " << minsupval;
 
     InsererVal(P2, minsupval);
@@ -98,6 +99,16 @@ void depilerL(PileL* &pile, int &val) {
     delete temp;
 }
 
+void Creation(PileL* &pile, int size) {
+    for(int i = 1; i <= size; i++) {
+        int temp;
+        cout << "Entrez le " << i << (i == 1 ? "er" : "eme") << " element: ";
+        cin >> temp;
+        empilerL(pile, temp);
+    }
+    cout << endl;
+}
+
 void AfficherPL(PileL* &pile) {
     if(estVideL(pile)) {
         cout << "pile est vide" << endl;
@@ -122,7 +133,11 @@ void AfficherPL(PileL* &pile) {
     cout << endl;
 }
 
-void ExtrairePlusPetitSupAVal(PileL* &pile, int val, int &retourVal) {
+void ExtrairePlusPetitSupAVal(PileL* &pile, int &retourVal) {
+    int val;
+    cout << "Entrez la valeur pour extraire la plus petit sup valeur: ";
+    cin >> val;
+
     if(estVideL(pile)) {
         cout << "Pile est vide";
         return;
