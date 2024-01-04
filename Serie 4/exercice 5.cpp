@@ -65,7 +65,7 @@ int profondeurArbre(Sommet *racine) {
         int profondeurGauche = profondeurArbre(racine->petit);
         int profondeurDroit = profondeurArbre(racine->grand);
 
-        //? Retourner la valeur maximale entre la profondeur gauche et droite + 1
+        //? Retourner la valeur maximale entre la profondeur gauche ou droite + 1
         return (profondeurGauche > profondeurDroit) ? (profondeurGauche + 1) : (profondeurDroit + 1);
     }
 }
