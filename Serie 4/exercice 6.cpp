@@ -132,16 +132,3 @@ void afficherNiveaux(Sommet* racine) {
         cout << endl;
     }
 }
-
-
-int maind() {
-int* memory_location = (int*)0x00A9FF1C;
-*memory_location = 0x8;
-if (*memory_location > 0x96) {
-// Jump target for jle
-} else {
- // Jump target for jmp
-}
-
-    return 0;
-}
